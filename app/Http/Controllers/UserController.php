@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\DeleteRequest;
-use App\Http\Requests\User\UserGetRequest;
-use App\Http\Requests\User\UserListRequest;
+use App\Http\Requests\User\UserShowRequest;
+use App\Http\Requests\User\UserIndexRequest;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(UserListRequest $request)
+    public function index(UserIndexRequest $request)
     {
         $users = User::All();
         $item = UserResource::collection($users);
@@ -34,7 +34,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        $item = new UserResource($user);
+        return response()->json($item);
     }
 
     /**

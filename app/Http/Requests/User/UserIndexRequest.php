@@ -12,7 +12,7 @@ use App\Http\Requests\ApiRequest;
  *
  */
 
-class UserListRequest extends ApiRequest
+class UserIndexRequest extends ApiRequest
 {
     /**
      * Get the validation rules that apply to the request.
