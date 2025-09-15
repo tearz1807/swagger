@@ -12,10 +12,10 @@ Route::group([
 
 ], function ($router) {
 
-    Route::any('login', [AuthController::class, 'login'])->name('api.login');
-    Route::any('logout', [AuthController::class, 'logout'])->name('api.logout');
-    Route::any('refresh', [AuthController::class, 'refresh'])->name('api.refresh');
-    Route::any('me', [AuthController::class, 'me'])->name('api.me');
+    Route::post('login', [AuthController::class, 'login'])->name('api.login');
+    Route::get('logout', [AuthController::class, 'logout'])->name('api.logout');
+    Route::get('refresh', [AuthController::class, 'refresh'])->name('api.refresh');
+    Route::get('me', [AuthController::class, 'me'])->name('api.me');
 
 });
 

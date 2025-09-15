@@ -14,8 +14,12 @@ class UserApiTest extends TestCaseApi
 
     public function test_delete(): void
     {
-
+        $this->withoutMiddleware();
         $response = $this->withBearer()->json('delete', 'http://localhost/api/user/1');
+
+        $response->assertStatus(200);
+
+        $response = $this->flushHeaders()->json('delete', 'http://localhost/api/user/1');
 
         $response->assertStatus(200);
 

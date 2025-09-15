@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use RonasIT\AutoDoc\Traits\AutoDocTestCaseTrait;
 
@@ -27,7 +26,7 @@ abstract class TestCaseApi extends BaseTestCase
             $this->artisan('migrate:fresh');
             $this->seed();
         }
-        $this->getToken();
+        //$this->getToken();
     }
 
     protected function getToken()
@@ -40,10 +39,10 @@ abstract class TestCaseApi extends BaseTestCase
         return $this->token;
     }
 
-    protected function withBearer()
+    protected function withBearer($token = null)
     {
         return $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->token,
+            'Authorization' => 'Bearer ' . is_null($token) ? $this->token : $token,
         ]);
     }
 }

@@ -5,20 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * @summary Авторизация пользователя
+ * @summary Auth user
  *
- * @description Данный ендпоинт предназначен для получения ключа для последушющего использования в апи
+ * @description current method use for autch user
  *
- * @_204 Successful
  *
- * @Authorize
- * @header
- * @query
- * @jwt
+ * @email required email for auth
  *
- * @email required Емейл для авторизации
- *
- * @password required паоль для авторизации
+ * @password required password for auth
  */
 
 class LoginRequest extends FormRequest
