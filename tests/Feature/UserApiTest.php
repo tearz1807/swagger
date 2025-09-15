@@ -11,13 +11,11 @@ class UserApiTest extends TestCaseApi
      *
      * @return void
      */
+
     public function test_delete(): void
     {
-/*
- * ->withHeaders([
-            'Authorization' => 'Bearer ' . $this->token,
-        ])*/
-        $response = $this->json('delete', 'http://localhost/api/user/1');
+
+        $response = $this->withBearer()->json('delete', 'http://localhost/api/user/1');
 
         $response->assertStatus(200);
 
@@ -26,8 +24,18 @@ class UserApiTest extends TestCaseApi
     public function test_create(): void
     {
 
-        $response = $this->json('post', 'http://localhost/api/user');
+        $response = $this->withBearer()->json('post', 'http://localhost/api/user');
 
         $response->assertStatus(200);
     }
+
+    public function test_get_all(): void
+    {
+        $this->getToken();
+
+        $response = $this->withBearer()->json('get', 'http://localhost/api/user');
+
+        $response->assertStatus(200);
+    }
+
 }

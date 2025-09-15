@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-
 /**
  * @summary Авторизация пользователя
  *
@@ -21,12 +20,10 @@ use Illuminate\Foundation\Http\FormRequest;
  * @password required паоль для авторизации
  */
 
-class LoginRequest extends FormRequest
+class UserDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -41,8 +38,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required|string',
+            //
         ];
     }
 }

@@ -7,8 +7,7 @@ use App\Http\Controllers\UserController;
 
 
 Route::group([
-
-    'middleware' => ['api', 'test'],
+    'middleware' => ['test'],
     'prefix' => 'auth'
 
 ], function ($router) {
@@ -22,7 +21,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth:api', 'test'],
+    'middleware' => ['test'],
     'prefix' => 'user'
 ], function ($router) {
 

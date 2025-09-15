@@ -27,7 +27,7 @@ abstract class TestCaseApi extends BaseTestCase
             $this->artisan('migrate:fresh');
             $this->seed();
         }
-        $this->token = $this->getToken();
+        $this->getToken();
     }
 
     protected function getToken()
@@ -36,6 +36,14 @@ abstract class TestCaseApi extends BaseTestCase
             'email' => 'test@example.com',
             'password' => 'password'
         ]);
-        return (json_decode($response->getContent()))->access_token;
+        $this->token = (json_decode($response->getContent()))->access_token;
+        return $this->token;
+    }
+
+    protected function withBearer()
+    {
+        return $this->withHeaders([
+            'Authorization' => 'Bearer ' . $this->token,
+        ]);
     }
 }

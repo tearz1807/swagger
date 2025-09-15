@@ -66,6 +66,14 @@ return [
     'basePath' => '/',
     'schemes' => [],
     'definitions' => [],
+    'securitySchemes' => [
+        'bearerAuth' => [
+            "type" => "http",
+            "description" => "JWT Authorization header using the Bearer scheme.",
+            "scheme" => "bearer",
+            "bearerFormat" => "JWT"
+        ]
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -75,7 +83,7 @@ return [
     | Library name, which used to secure the project.
     | Should have one of the key from the `security_drivers` config
     */
-    'security' => '',
+    'security' => 'bearerAuth',
     'security_drivers' => [
         'jwt' => [
             'type' => 'apiKey',
@@ -86,6 +94,11 @@ return [
             'type' => 'apiKey',
             'name' => '__ym_uid',
             'in' => 'cookie',
+        ],
+        'bearerAuth' => [
+            'type' => 'apiKey',
+            'name' => 'Authorization',
+            'in' => 'header',
         ],
     ],
 
@@ -142,7 +155,7 @@ return [
         'remote' => [
             'class' => RemoteDriver::class,
             'key' => env('SWAGGER_REMOTE_DRIVER_KEY', 'project_name'),
-            'url' => env('SWAGGER_REMOTE_DRIVER_URL', 'https://example.com'),
+            'url' => env('SWAGGER_REMOTE_DRIVER_URL', 'http://localhost'),
         ],
         'storage' => [
             'class' => StorageDriver::class,
