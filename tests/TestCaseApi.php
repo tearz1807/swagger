@@ -11,7 +11,6 @@ abstract class TestCaseApi extends BaseTestCase
 
 
     static $seed = false;
-    protected $token = '';
 
     /**
      * Setup the data test.
@@ -23,26 +22,18 @@ abstract class TestCaseApi extends BaseTestCase
         parent::setUp();
         if (!self::$seed) {
             self::$seed = true;
-            $this->artisan('migrate:fresh');
+            $this->artisan('migrate:refresh');
             $this->seed();
         }
-        //$this->getToken();
     }
 
-    protected function getToken()
+    protected function setToken()
     {
-        $response = $this->json('post', 'http://localhost/api/auth/login', [
+        $this->json('post', 'http://localhost/api/auth/login', [
             'email' => 'test@example.com',
             'password' => 'password'
         ]);
-        $this->token = (json_decode($response->getContent()))->access_token;
-        return $this->token;
+        return $this;
     }
 
-    protected function withBearer($token = null)
-    {
-        return $this->withHeaders([
-            'Authorization' => 'Bearer ' . is_null($token) ? $this->token : $token,
-        ]);
-    }
 }

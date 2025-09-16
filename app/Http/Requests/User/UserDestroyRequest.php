@@ -9,7 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
  *
  * @description Delete user by id
  *
- * @id user id
+ * @id is required user id
  */
 
 class UserDestroyRequest extends ApiRequest

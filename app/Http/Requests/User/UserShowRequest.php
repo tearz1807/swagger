@@ -3,13 +3,13 @@
 namespace App\Http\Requests\User;
 
 use App\Http\Requests\ApiRequest;
-use Illuminate\Foundation\Http\FormRequest;
+
 /**
- * @summary User info
+ * @summary User info by id
  *
  * @description Show user by id
  *
- *
+ * @id is required
  */
 
 class UserShowRequest extends ApiRequest

@@ -3,7 +3,19 @@
 namespace App\Http\Requests\User;
 
 use App\Http\Requests\ApiRequest;
-use Illuminate\Foundation\Http\FormRequest;
+
+/**
+ * @summary Create user
+ *
+ * @description current method use for create user
+ *
+ * @name required name for create user
+ *
+ * @email required email for create user
+ *
+ * @password required password for create user
+ */
+
 
 class UserStoreRequest extends ApiRequest
 {
@@ -16,6 +28,7 @@ class UserStoreRequest extends ApiRequest
     public function rules(): array
     {
         return [
+            'name' => 'required|string',
             'email' => 'required|email',
             'password' => 'required|string',
         ];

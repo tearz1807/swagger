@@ -3,7 +3,20 @@
 namespace App\Http\Requests\User;
 
 use App\Http\Requests\ApiRequest;
-use Illuminate\Foundation\Http\FormRequest;
+
+/**
+ * @summary Update user
+ *
+ * @description current method use for update user
+ *
+ * @name update name for create user
+ *
+ * @email update email for user
+ *
+ * @password update password for user
+ *
+ * @id is required user id
+ */
 
 class UserUpdateRequest extends ApiRequest
 {
@@ -15,6 +28,7 @@ class UserUpdateRequest extends ApiRequest
     public function rules(): array
     {
         return [
+            'name' => 'string',
             'email' => 'email',
             'password' => 'string',
         ];
