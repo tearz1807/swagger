@@ -35,3 +35,9 @@ sail artisan test --coverage-htm storage/app/public/coverage
 - Open [Dock](http://localhost/api/doc/)
 - Open [Coverage](http://localhost/storage/coverage/)
 
+##### Fix autorize
+fix module ronasit/laravel-swagger
+add line 155 to SwaggerService.php block 'components'
+```
+'securitySchemes' => $this->config['securitySchemes'],
+```
