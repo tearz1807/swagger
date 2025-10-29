@@ -4102,16 +4102,16 @@
         },
         {
             "name": "ronasit/laravel-swagger",
-            "version": "3.2.3",
+            "version": "3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RonasIT/laravel-swagger.git",
-                "reference": "2a8f884ba5fc3986ab4021367079580f36c63744"
+                "reference": "4ec8d4d34f89219f79d79e950e36ae700f46aac7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RonasIT/laravel-swagger/zipball/2a8f884ba5fc3986ab4021367079580f36c63744",
-                "reference": "2a8f884ba5fc3986ab4021367079580f36c63744",
+                "url": "https://api.github.com/repos/RonasIT/laravel-swagger/zipball/4ec8d4d34f89219f79d79e950e36ae700f46aac7",
+                "reference": "4ec8d4d34f89219f79d79e950e36ae700f46aac7",
                 "shasum": ""
             },
             "require": {
@@ -4161,9 +4161,9 @@
             ],
             "support": {
                 "issues": "https://github.com/RonasIT/laravel-swagger/issues",
-                "source": "https://github.com/RonasIT/laravel-swagger/tree/3.2.3"
+                "source": "https://github.com/RonasIT/laravel-swagger/tree/3.2.4"
             },
-            "time": "2025-08-14T08:52:43+00:00"
+            "time": "2025-08-29T06:08:00+00:00"
         },
         {
             "name": "sebastian/cli-parser",
