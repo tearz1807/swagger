@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 
 Route::group([
@@ -27,4 +28,15 @@ Route::group([
     Route::post('/', [UserController::class, 'store']);
     Route::put('/{id}', [UserController::class, 'update']);
     Route::delete('/{id}', [UserController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' => ['test', 'admin'],
+    'prefix' => 'admin'
+], function ($router) {
+    Route::get('/articles', [AdminController::class, 'getArticles']);
+    Route::post('/articles', [AdminController::class, 'createArticle']);
+    Route::put('/articles/{id}', [AdminController::class, 'updateArticle']);
+    Route::delete('/articles/{id}', [AdminController::class, 'deleteArticle']);
+    Route::post('/articles/{id}/toggle-publish', [AdminController::class, 'togglePublish']);
 });
