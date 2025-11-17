@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\ArticleController;
 
 
 Route::group([
@@ -34,9 +34,9 @@ Route::group([
     'middleware' => ['test', 'admin'],
     'prefix' => 'admin'
 ], function ($router) {
-    Route::get('/articles', [AdminController::class, 'getArticles']);
-    Route::post('/articles', [AdminController::class, 'createArticle']);
-    Route::put('/articles/{id}', [AdminController::class, 'updateArticle']);
-    Route::delete('/articles/{id}', [AdminController::class, 'deleteArticle']);
-    Route::post('/articles/{id}/toggle-publish', [AdminController::class, 'togglePublish']);
+    Route::get('/articles', [ArticleController::class, 'index']);
+    Route::post('/articles', [ArticleController::class, 'store']);
+    Route::put('/articles/{id}', [ArticleController::class, 'update']);
+    Route::delete('/articles/{id}', [ArticleController::class, 'destroy']);
+    Route::post('/articles/{id}/toggle-publish', [ArticleController::class, 'togglePublish']);
 });

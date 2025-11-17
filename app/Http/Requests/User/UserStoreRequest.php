@@ -15,11 +15,8 @@ use App\Http\Requests\ApiRequest;
  *
  * @password required password for create user
  */
-
-
 class UserStoreRequest extends ApiRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,9 +25,16 @@ class UserStoreRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required|string',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.unique' => 'Email already exists',
         ];
     }
 }

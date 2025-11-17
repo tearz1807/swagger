@@ -30,10 +30,13 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
+        if (!$user) {
+            return $this->responseError('User not found', 404);
+        }
+
         return $this->response(
             new UserResource($user)
         );
-
     }
 
     /**
@@ -66,22 +69,23 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if ($user) {
-
-            $user->forceFill($request->only([
-                'email',
-                'name',
-                'password',
-            ]));
-
-            if ($user->save()) {
-                return $this->response(
-                    new UserResource($user)
-                );
-            }
+        if (!$user) {
+            return $this->responseError('User not found', 404);
         }
-        return $this->responseError('Not update user');
 
+        $user->forceFill($request->only([
+            'email',
+            'name',
+            'password',
+        ]));
+
+        if ($user->save()) {
+            return $this->response(
+                new UserResource($user)
+            );
+        }
+
+        return $this->responseError('Not update user');
     }
 
     /**
@@ -90,6 +94,10 @@ class UserController extends Controller
     public function destroy(UserDestroyRequest $request, string $id)
     {
         $user = User::find($id);
+
+        if (!$user) {
+            return $this->responseError('User not found', 404);
+        }
 
         if($user->delete()){
             return $this->response(['message' => 'User deleted successfully'], 204);

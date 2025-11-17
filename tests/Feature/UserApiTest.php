@@ -42,7 +42,7 @@ class UserApiTest extends TestCaseApi
         $response->assertStatus(201);
 
         $response = $this->json('post', 'http://localhost/api/user', $new_user);
-        $response->assertStatus(500);
+        $response->assertStatus(422);
     }
 
     public function test_update(): void
@@ -60,7 +60,7 @@ class UserApiTest extends TestCaseApi
         $response->assertStatus(200);
 
         $response = $this->json('put', 'http://localhost/api/user/200', $update_user);
-        $response->assertStatus(500);
+        $response->assertStatus(404);
 
     }
 
@@ -76,7 +76,7 @@ class UserApiTest extends TestCaseApi
 
         $response = $this->json('delete', 'http://localhost/api/user/3');
 
-        $response->assertStatus(500);
+        $response->assertStatus(404);
 
     }
 }
