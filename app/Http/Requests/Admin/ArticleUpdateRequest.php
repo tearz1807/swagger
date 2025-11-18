@@ -5,6 +5,10 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @summary Update article
+ * @description Update existing article (admin only)
+ */
 class ArticleUpdateRequest extends FormRequest
 {
     public function authorize(): bool
