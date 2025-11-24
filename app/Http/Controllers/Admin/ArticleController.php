@@ -69,9 +69,9 @@ class ArticleController extends Controller
      */
     public function store(ArticleStoreRequest $request)
     {
-        $article = Article::create([
-            ...$request->only(['title', 'content', 'image']),
-            'slug' => Str::slug($request->title),
+        $article = Article::factory()->create([
+            'title' => $request->title,
+            'image' => $request->image,
             'user_id' => Auth::id(),
         ]);
 

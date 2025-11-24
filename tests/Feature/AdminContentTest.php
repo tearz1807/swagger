@@ -19,7 +19,7 @@ class AdminContentTest extends TestCase
         $response = $this->withHeader('Authorization', "Bearer $token")
             ->json('POST', '/api/admin/articles', [
                 'title' => 'Test Article',
-                'content' => 'This is test content'
+                'content' => 'Test content',
             ]);
 
         $response->assertStatus(201);
