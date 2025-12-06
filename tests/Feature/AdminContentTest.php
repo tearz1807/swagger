@@ -90,4 +90,28 @@ class AdminContentTest extends TestCase
         $response->assertStatus(200);
         $this->assertDatabaseMissing('articles', ['id' => $article->id]);
     }
+
+    public function test_article_scope_published()
+    {
+        Article::factory()->create(['is_published' => true]);
+        Article::factory()->create(['is_published' => false]);
+        
+        $publishedCount = Article::published()->count();
+        $unpublishedCount = Article::unpublished()->count();
+        
+        $this->assertEquals(1, $publishedCount);
+        $this->assertEquals(1, $unpublishedCount);
+    }
+
+    public function test_error_messages_localized()
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+        $token = auth()->login($admin);
+
+        $response = $this->withHeader('Authorization', "Bearer $token")
+            ->json('GET', '/api/admin/articles/999999');
+        
+        $response->assertStatus(404)
+            ->assertJson(['message' => trans('messages.article.not_found')]);
+    }
 }

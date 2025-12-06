@@ -2,20 +2,15 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AdminRequest;
 
 /**
  * @summary Delete article
  * @description Delete article (admin only)
  */
-class ArticleDestroyRequest extends FormRequest
+class ArticleDestroyRequest extends AdminRequest
 {
-    public function authorize(): bool
-    {
-        return Auth::check() && Auth::user()->is_admin;
-    }
-
     public function rules(): array
     {
         return [];

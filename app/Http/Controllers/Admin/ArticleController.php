@@ -25,12 +25,12 @@ class ArticleController extends Controller
      */
     public function index(ArticleIndexRequest $request)
     {
-        $articles = Article::with('user')
-            ->when($request->has('is_published'), function($query) use ($request) {
-                return $query->where('is_published', $request->boolean('is_published'));
-            })
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+    $articles = Article::with('user')
+        ->when($request->has('is_published'), function($query) use ($request) {
+            return $query->published($request->boolean('is_published'));
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
 
         return $this->response(
             ArticleResource::collection($articles)
@@ -51,7 +51,7 @@ class ArticleController extends Controller
         $article = Article::find($id);
 
         if (!$article) {
-            return $this->responseError('Article not found', 404);
+            return $this->responseError(trans('messages.article.not_found'), 404);
         }
 
         return $this->response(
@@ -82,7 +82,7 @@ class ArticleController extends Controller
             );
         }
 
-        return $this->responseError('Not create article');
+        return $this->responseError(trans('messages.article.not_created'));
     }
 
     /**
@@ -99,7 +99,7 @@ class ArticleController extends Controller
         $article = Article::find($id);
 
         if (!$article) {
-            return $this->responseError('Article not found', 404);
+            return $this->responseError(trans('messages.article.not_found'), 404);
         }
 
         $updateData = $request->only([
@@ -122,7 +122,7 @@ class ArticleController extends Controller
             );
         }
 
-        return $this->responseError('Not update article');
+        return $this->responseError(trans('messages.article.not_updated'));
     }
 
     /**
@@ -138,15 +138,11 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        if (!$article) {
-            return $this->responseError('Article not found', 404);
-        }
-
         if($article->delete()){
-            return $this->response(['message' => 'Article deleted successfully']);
+            return $this->response(['message' => trans('messages.article.deleted')]);
         }
 
-        return $this->responseError('Not deleted');
+        return $this->responseError(trans('messages.article.not_deleted'));
     }
 
     /**
@@ -163,17 +159,22 @@ class ArticleController extends Controller
         $article = Article::find($id);
 
         if (!$article) {
-            return $this->responseError('Article not found', 404);
+            return $this->responseError(trans('messages.article.not_found'), 404);
         }
 
         $article->is_published = !$article->is_published;
         
         if ($article->save()) {
-            return $this->response(
-                new ArticleResource($article)
-            );
+            $message = $article->is_published 
+                ? trans('messages.article.published')
+                : trans('messages.article.unpublished');
+            
+            return $this->response([
+                'message' => $message,
+                'article' => new ArticleResource($article)
+            ]);
         }
 
-        return $this->responseError('Not update article');
+        return $this->responseError(trans('messages.article.not_updated'));
     }
 }

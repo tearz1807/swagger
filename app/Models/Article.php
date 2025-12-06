@@ -22,4 +22,14 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopePublished($query, bool $status = true)
+    {
+        return $query->where('is_published', $status);
+    }
+
+    public function scopeUnpublished($query)
+    {
+        return $query->where('is_published', false);
+    }
 }

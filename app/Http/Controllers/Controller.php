@@ -10,13 +10,19 @@ abstract class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    protected function response($data, $status = 200)
+    protected function response($data, $code = 200)
     {
-        return response()->json($data, $status);
+        return response()->json([
+            'status' => 'success',
+            'data' => $data
+        ], $code);
     }
 
-    protected function responseError($message, $status = 400)
+    protected function responseError($message, $code = 400)
     {
-        return response()->json(['error' => $message], $status);
+        return response()->json([
+            'status' => 'error',
+            'message' => $message
+        ], $code);
     }
 }

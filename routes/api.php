@@ -39,4 +39,5 @@ Route::group([
     Route::put('/articles/{id}', [ArticleController::class, 'update']);
     Route::delete('/articles/{id}', [ArticleController::class, 'destroy']);
     Route::post('/articles/{id}/toggle-publish', [ArticleController::class, 'togglePublish']);
+    Route::get('/articles/{id}', [ArticleController::class, 'show']);
 });
